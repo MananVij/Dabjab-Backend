@@ -65,8 +65,9 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.statics.findByCredentials = async (pincode, date) => {
-    console.log(pincode, date);
+    // console.log(pincode, date);
     const data = await CampData.find({pincode, date})
+    console.log(data)
     return data
 }
 

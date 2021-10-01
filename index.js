@@ -16,13 +16,13 @@ const { ObjectId } = require('mongodb')
 
 // const userRouter = require('./router/user-router')
 const campRouter = require('./router/camp-router')
-// const subscribeRouter = require('./router/subscribe-router')
+const subscribeRouter = require('./router/subscribe-router')
 // const otpRouter = require('./router/otp')
 app.use(express.json())
 
 // app.use(userRouter)          //here
 app.use(campRouter)
-// app.use(subscribeRouter)         //here
+app.use(subscribeRouter)         //here
 // app.use(otpRouter)
 
 

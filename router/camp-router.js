@@ -5,12 +5,44 @@ const router = new express.Router();
 
 const output = require('../public/output-data')
 const CampData = require('../models/camp-data')
+const Subscriber = require('../models/subscribe-model')
+const {sendWelcomeEmail, sendNotificationEmail} = require('../db/email')
+
 
 router.post('/postdata', async (req, res) => {
     const campData = new CampData(req.body);
-    console.log(req)
+
+    const pincode = req.body.pincode
+    const dateOfCamp = req.body.date
     campData.save().then(() => {
-        res.send(campData)
+        Subscriber.findByCredentials(pincode).then((subscribers) => {
+
+            subscribers.map((subscriber) => {
+                const name = subscriber.name
+                const email = subscriber.email
+                var date = new Date()
+                date.setDate(date.getDate());
+                console.log(date.typeof)
+                console.log(date, subscriber)
+                sendNotificationEmail(name, email, dateOfCamp)
+            })
+        })
+
+
+        // const subscribers = Subscriber.findByCredentials(pincode)
+        // console.log(subscribers.typeof)
+        //ok till here
+
+        // console.log(subscribers)
+        // subscribers.map((subscriber) => {
+        //     const name = subscriber.name
+        //     const email = subscriber.email
+        //     var date = new Date()
+        //     date.setDate(date.getDate() - 2);
+        //     console.log(date, subscriber)
+            // sendNotificationEmail(name, email, date)
+    // })
+    // changes end  
     }).catch((error) => {
         console.log(error);
         res.send(error.message).status(401)
