@@ -1,5 +1,4 @@
 const sgMail = require('@sendgrid/mail')
-// const sendGridAPI = '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'
 const sendGridAPI = (process.env.SENDGRID_API_KEY)
 sgMail.setApiKey(sendGridAPI)
 
@@ -30,7 +29,21 @@ const sendNotificationEmail = (name, email, date) => {
       })
 }
 
+const sendNotificationEmailIfCampExists = (name, email) => {
+    const link = 'https://dabjab.netlify.app/'
+    sgMail.send({
+        to: email,
+        from: 'manansdsh@gmail.com',
+        subject: 'Vaccine Notification',
+        text: `Greetings from DabJab, ${name}. You have a vaccine slot available. Please check dabjab.netlify.com to know more details. Thanks!`
+      }).then(() => {
+          console.log('email sent');
+      }).catch((e) => {
+          console.log(e);
+      })
+}
 module.exports = {
     sendWelcomeEmail,
-    sendNotificationEmail
+    sendNotificationEmail,
+    sendNotificationEmailIfCampExists
 }

@@ -71,5 +71,11 @@ userSchema.statics.findByCredentials = async (pincode, date) => {
     return data
 }
 
+userSchema.statics.findByCredentialsOfPincode = async (pincode) => {
+    // console.log(pincode, date);
+    const data = await CampData.find({pincode})
+    console.log(data)
+    return data
+}
 const CampData = mongoose.model('CampData', userSchema)
 module.exports = CampData
