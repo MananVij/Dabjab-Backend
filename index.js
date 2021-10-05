@@ -1,15 +1,27 @@
+const express = require('express')
+const app = express();
+const cors = require('cors')
+// const corsOptions = {
+//     origin: '*',
+// }
+// app.use(cors(corsOptions))
+app.use(cors())
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    )
+
+    next()
+})
+
+
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 const port = process.env.PORT
 const mongoose = require('./db/mongoose');
 
-const express = require('express')
-const app = express();
-const cors = require('cors')
-const corsOptions = {
-    origin: '*',
-}
-app.use(cors(corsOptions))
 
 
 const request = require('request')
