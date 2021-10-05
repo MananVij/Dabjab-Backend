@@ -9,6 +9,56 @@ const Subscriber = require('../models/subscribe-model')
 const {sendWelcomeEmail, sendNotificationEmail} = require('../db/email')
 
 
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+
+router.post('/sendotp', async (req, res) => {
+    client.verify
+         .services(process.env.SERVICE_ID)
+         .verifications.create({
+           to: `+91${req.body.phoneNumber}`,
+           channel: "sms",
+         })
+         .then((data) => {
+           res.status(200).send(data);
+         })
+         .catch((error) => {
+             console.log(error)
+           res.status(500).send(error);
+         });
+
+})
+
+router.post('/verifyotp', async (req, res) =>{
+    if (req.body.phoneNumber && req.body.code.length === 6) {
+        client.verify
+          .services(process.env.SERVICE_ID)
+          .verificationChecks.create({
+            to: `+91${req.body.phoneNumber}`,
+            code: req.body.code,
+          })
+          .then((data) => {
+              console.log(data)
+            if (data.status === "approved") {
+              res.status(200).send({
+                message: "User is Verified!!",
+                data,
+              });
+            } 
+          }
+          );
+      } else {
+        res.status(400).send({
+          message: "Wrong phone number or code :(",
+          phonenumber: req.query.phoneNumber,
+          
+        });
+      }
+})
+
+
 router.post('/postdata', async (req, res) => {
     const campData = new CampData(req.body);
 
