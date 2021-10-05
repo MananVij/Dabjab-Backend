@@ -31,21 +31,21 @@ const userSchema = new mongoose.Schema({
     startTime: {
         type: String,
         trim: true,
-        // required: true,
+        required: true,
     },
     endTime: {
         type: String,
         trim: true,
-        // required: true,
+        required: true,
     },
     vaccine: {
         type: String,
         uppercase: true,
-        // required: true,
+        required: true,
     },
     fee_type: {
         type: Boolean,
-        // required: true,
+        required: true,
     },
     fee: {
         type: Number,
@@ -54,11 +54,11 @@ const userSchema = new mongoose.Schema({
     },
     available_capacity_dose1: {
         type: Number,
-        // required: true,
+        required: true,
     },
     available_capacity_dose2: {
         type: Number,
-        // required: true,
+        required: true,
     }
 },{
     timestamps: true

@@ -61,7 +61,7 @@ router.post('/verifyotp', async (req, res) =>{
 
 router.post('/postdata', async (req, res) => {
     const campData = new CampData(req.body);
-
+    
     const pincode = req.body.pincode
     const dateOfCamp = req.body.date
     campData.save().then(() => {
@@ -78,21 +78,6 @@ router.post('/postdata', async (req, res) => {
             })
         })
 
-
-        // const subscribers = Subscriber.findByCredentials(pincode)
-        // console.log(subscribers.typeof)
-        //ok till here
-
-        // console.log(subscribers)
-        // subscribers.map((subscriber) => {
-        //     const name = subscriber.name
-        //     const email = subscriber.email
-        //     var date = new Date()
-        //     date.setDate(date.getDate() - 2);
-        //     console.log(date, subscriber)
-            // sendNotificationEmail(name, email, date)
-    // })
-    // changes end  
     }).catch((error) => {
         console.log(error);
         res.send(error.message).status(401)

@@ -6,7 +6,12 @@ const mongoose = require('./db/mongoose');
 const express = require('express')
 const app = express();
 const cors = require('cors')
-app.use(cors())
+const corsOptions = {
+    origin: '*',
+}
+app.use(cors(corsOptions))
+
+
 const request = require('request')
 const fetch = require('node-fetch')
 
