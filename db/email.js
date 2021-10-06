@@ -21,7 +21,7 @@ const sendNotificationEmail = (name, email, date) => {
         to: email,
         from: 'manansdsh@gmail.com',
         subject: 'Vaccine Notification',
-        text: `Greetings from DabJab, ${name}. You have a vaccine slot available on ${date}. Please check ${link} to know more details. Thanks!`
+        text: `Greetings from DabJab, ${name}. You have a vaccine slot available on ${date}. Please check dabjab.netlify.app to know more details. Thanks!`
       }).then(() => {
           console.log('email sent');
       }).catch((e) => {

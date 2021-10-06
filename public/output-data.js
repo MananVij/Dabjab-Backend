@@ -3,7 +3,7 @@ dotenv.config({ path: "./config.env" });
 const request = require('request');
 
 const output = (pincode, date, callback) => {
-    const cowinURL = process.env.COWIN_API + pincode +'&date=' + date + '&callback=' + callback;
+    const cowinURL = process.env.COWIN_API + 'pincode=' + pincode +'&date=' + date
     request({url: cowinURL, json: true}, (err, res) => {
             if(err) {
                 return callback(err, undefined);

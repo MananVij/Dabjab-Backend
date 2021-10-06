@@ -1,16 +1,28 @@
 const express = require('express')
 const app = express();
 const cors = require('cors')
-const corsOptions = {
-    origin: 'https://dabjab.netlify.com',
-    optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions))
-// app.use(cors())
+// const corsOptions = {
+//     origin: 'https://dabjab.netlify.com',
+//     optionsSuccessStatus: 200
+// }
+// app.use(cors(corsOptions))
+app.use(cors())
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.setHeader(
+//       "Access-Control-Allow-Methods",
+//       "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+//     );
+//     res.setHeader(
+//       "Access-Control-Allow-Headers",
+//       "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+//     );
+//     res.header("Access-Control-Allow-Credentials", true);
+//     next(); // dont forget this
+//   });
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
-const server = require('http').createServer();
 const port = process.env.PORT || 3000
 const mongoose = require('./db/mongoose');
 

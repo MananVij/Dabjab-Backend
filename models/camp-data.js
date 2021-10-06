@@ -43,10 +43,10 @@ const userSchema = new mongoose.Schema({
         uppercase: true,
         required: true,
     },
-    fee_type: {
-        type: Boolean,
-        required: true,
-    },
+    // fee_type: {
+    //     type: Boolean,
+    //     required: true,
+    // },
     fee: {
         type: Number,
         required: true,
