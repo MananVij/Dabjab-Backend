@@ -7,41 +7,26 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 // app.use(cors())
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*')
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    )
-
-    next()
-})
-
 
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
-const port = process.env.PORT
+const server = require('http').createServer();
+const port = process.env.PORT || 3000
 const mongoose = require('./db/mongoose');
-
 
 
 const request = require('request')
 const fetch = require('node-fetch')
-
 const { ObjectId } = require('mongodb')
 
-// const User = require('./models/user_reg')       //To be uploadded Shortly
 
-// const userRouter = require('./router/user-router')
 const campRouter = require('./router/camp-router')
 const subscribeRouter = require('./router/subscribe-router')
-// const otpRouter = require('./router/otp')
+
 app.use(express.json())
 
-// app.use(userRouter)          //here
 app.use(campRouter)
-app.use(subscribeRouter)         //here
-// app.use(otpRouter)
+app.use(subscribeRouter)         
 
 
 app.listen(port, () => {
