@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors')
 const corsOptions = {
     origin: 'https://dabjab.netlify.com',
+    optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions))
 // app.use(cors())
