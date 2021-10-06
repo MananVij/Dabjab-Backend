@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express();
 const cors = require('cors')
-// const corsOptions = {
-//     origin: '*',
-// }
-// app.use(cors(corsOptions))
-app.use(cors())
+const corsOptions = {
+    origin: 'https://dabjab.netlify.com',
+}
+app.use(cors(corsOptions))
+// app.use(cors())
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader(
