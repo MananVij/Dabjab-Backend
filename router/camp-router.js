@@ -14,13 +14,13 @@ async function checkCowin() {
   const subs = await Subscriber.find();
 
   const today = new Date();
-  const tomm = new Date();
-  tomm.setDate(today.getDate() + 1);
-  const dateTomm = tomm.toISOString().split("T")[0];
+  const sendDate = new Date();
+  sendDate.setDate(today.getDate() + 2);
+  const datesendDate = sendDate.toISOString().split("T")[0];
 
-  const year = dateTomm.slice(0, 4);
-  const month = dateTomm.slice(5, 7);
-  const date = dateTomm.slice(8, 10);
+  const year = datesendDate.slice(0, 4);
+  const month = datesendDate.slice(5, 7);
+  const date = datesendDate.slice(8, 10);
 
   //final date in dd-mm-yyyy
   const dateSearched = date + "-" + month + "-" + year;
@@ -49,7 +49,35 @@ async function checkCowin() {
       });
   });
 }
-checkCowin();
+// checkCowin();
+
+// Delete Old Camp Data
+async function deleteOldCampData() {
+    
+    const camps = await CampData.find()
+    console.log(camps)
+    
+    if(!camps) {
+        return
+    }
+
+    const today = new Date()
+    const dateToday = today.toISOString().split("T")[0];
+
+    camps.map((camp) => {
+        const date = camp.date.slice(0,2)
+        const month = camp.date.slice(3, 5)
+        const year = camp.date.slice(6, 10)
+        
+        // converting to yyyy-mm-dd
+        const campDate = `${year}-${month}-${date}`
+        if(campDate<dateToday) {
+            camp.deleteOne({_id: camp._id})
+            console.log('camp deleted')
+        }
+    })
+}
+deleteOldCampData()
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
