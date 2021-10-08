@@ -49,13 +49,16 @@ async function checkCowin() {
       });
   });
 }
-// checkCowin();
+const d = new Date()
+const t = d.toISOString()
+if(t.split('T')[1].split(':')[0] == '16' && t.split('T')[1].split(':')[1] == '30') {
+  checkCowin();
+}
 
 // Delete Old Camp Data
 async function deleteOldCampData() {
     
     const camps = await CampData.find()
-    console.log(camps)
     
     if(!camps) {
         return
