@@ -12,7 +12,6 @@ const output = (pincode, date, callback) => {
                 return callback('No session found', undefined);
             }
             const hospitals = res.body.centers
-            
             callback(undefined, 
                 hospitals.map( (hospital) => { 
                     return ({
@@ -20,8 +19,8 @@ const output = (pincode, date, callback) => {
                         hospitalAddress: hospital.address, 
                         pincode: hospital.pincode,
                         vaccine: hospital.sessions[0].vaccine,
-                        ifPaid: hospital.fee_type, 
-                        // fee: hospital.vaccine_fees[0].fee,
+                        // ifPaid: hospital.fee_type, 
+                        fee: hospital.vaccine_fees[0].fee,
                         date: hospital.sessions[0].date,
                         timeStart: hospital.from,
                         timeEnd: hospital.to,
