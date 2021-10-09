@@ -136,9 +136,8 @@ router.post("/postdata", async (req, res) => {
 
   const pincode = req.body.pincode;
   const dateOfCamp = req.body.date;
-  campData
-    .save()
-    .then(() => {
+  campData.save().then(() => {
+    res.send('Data Sent')
       console.log(campData)
       Subscriber.findByCredentials(pincode).then((subscribers) => {
         subscribers.map((subscriber) => {
@@ -148,11 +147,11 @@ router.post("/postdata", async (req, res) => {
           date.setDate(date.getDate());
           sendNotificationEmail(name, email, dateOfCamp);
         });
-      });
+      }); 
     })
     .catch((error) => {
-      console.log(error);
-      res.send(error.message).status(401);
+      console.log(error.message);
+      throw new Error(error.message)
     });
 });
 

@@ -18,7 +18,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         lowercase: true,
-        unique: true,
     },
     pincode: {
         required: true,
@@ -43,10 +42,6 @@ const userSchema = new mongoose.Schema({
         uppercase: true,
         required: true,
     },
-    // fee_type: {
-    //     type: Boolean,
-    //     required: true,
-    // },
     fee: {
         type: Number,
         required: true,
