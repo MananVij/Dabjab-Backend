@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const router = new express.Router();
 const fetch = require("node-fetch");
+const cors = require('cors')
 
 const output = require("../public/output-data");
 const CampData = require("../models/camp-data");
@@ -138,14 +139,13 @@ router.post("/postdata", async (req, res) => {
   campData
     .save()
     .then(() => {
+      console.log(campData)
       Subscriber.findByCredentials(pincode).then((subscribers) => {
         subscribers.map((subscriber) => {
           const name = subscriber.name;
           const email = subscriber.email;
           var date = new Date();
           date.setDate(date.getDate());
-          console.log(date.typeof);
-          console.log(date, subscriber);
           sendNotificationEmail(name, email, dateOfCamp);
         });
       });
