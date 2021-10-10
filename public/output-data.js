@@ -20,7 +20,7 @@ const output = (pincode, date, callback) => {
                         pincode: hospital.pincode,
                         vaccine: hospital.sessions[0].vaccine,
                         // ifPaid: hospital.fee_type, 
-                        fee: hospital.vaccine_fees[0].fee,
+                        // fee: hospital.vaccine_fees[0].fee,
                         date: hospital.sessions[0].date,
                         timeStart: hospital.from,
                         timeEnd: hospital.to,
